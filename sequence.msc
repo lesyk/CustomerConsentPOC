@@ -1,0 +1,61 @@
+msc {
+
+arcgradient=12, hscale=2;
+
+is [label="Identity Service"], cu [label="Customer"], dr [label="Data Requester"], do [label="Data Owner"], sc [label="Smart Contract"];
+
+...;
+
+is->* [label="advertise ()"];
+
+cu->cu [label="create (wid1)"];
+is<-cu [label="register (wid1, email1)"];
+
+dr->dr [label="create (wid2)"];
+is<-dr [label="register (wid2, email2)"];
+
+do->do [label="create (wid3)"];
+is<-do [label="register (wid3, email3)"];
+
+...;
+
+dr->is [label="wid request (email1)"];
+dr<-is [label="wid response (email1, wid1)"];
+
+dr->cu [label="eth request (wid1)"];
+cu=>cu [label="create (eth1)"];
+dr<-cu [label="eth response (eth1)"];
+
+dr->is [label="wid request (email3)"];
+dr<-is [label="wid response (email3, wid3)"];
+
+dr->do [label="eth request (wid3)"];
+do=>do [label="create (eth3)"];
+dr<-do [label="eth response (eth3)"];
+
+dr=>dr [label="create (eth2)"];
+
+dr=>sc [label="create contract (eht1, eth2, eth3)"];
+
+sc<=dr [label="consent request (eth1)"];
+sc=>cu [label="consent request (eth1)"];
+sc<=cu [label="consent response (eth1)"];
+sc=>dr [label="consent response (eth1)"];
+
+sc<=dr [label="data request (eth1)"];
+sc=>do [label="data request (eth1)"];
+
+do=>sc [label="confirm id request (eth1)"];
+cu<=sc [label="confirm id request (eth1)"];
+
+cu=>sc [label="confirm id response (eth1)"];
+do<=sc [label="confirm id response (eth1)"];
+
+do=>sc [label="data available (eth1)"];
+dr<=sc [label="data available (eth1)"];
+
+dr=>sc [label="data received (eth1)"];
+do<=sc [label="data received (eth1)"];
+
+}
+
