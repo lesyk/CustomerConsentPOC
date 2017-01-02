@@ -1,0 +1,18 @@
+digraph g {
+ // nodes
+ cm [label="Contract Manager"];
+ dr [label="Data Requester"];
+ a [label="Customer"];
+ do [label="Data Owner"];
+ eth [label="Ethereum BlockChain", shape=octagon];
+ // edges
+ dr -> eth [label="1 new consent(auth, owner)", fontsize=9.0];
+ dr -> eth [label="2 send request", fontsize=9.0];
+ eth -> a [label="3 receive request", fontsize=9.0];
+ a -> eth [label="4 accept", fontsize=9.0];
+ eth -> dr [label="5 accepted", fontsize=9.0];
+ dr -> do [label="6 get data(bc ref)", fontsize=9.0];
+ do -> eth [label="7 validate consent", fontsize=9.0];
+ cm -> eth [label="add contracts", fontsize=9.0];
+ dr -> cm [label="get contract refs", fontsize=9.0];
+}
