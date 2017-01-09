@@ -1,0 +1,49 @@
+msc {
+
+arcgradient=12, hscale=2;
+
+is [label="Identity Service (is)"], cu [label="Customer (cu)"], dr [label="Data Requester (dr)"], do [label="Data Owner (do)"], sc [label="Smart Contract (sc)"];
+
+is->* [label="1. advertise( wid(is) )"];
+
+is<-cu [label="2. register( wid(cu), email(cu), pubkey(cu) )"];
+is<-dr [label="3. register( wid(dr), email(dr), pubkey(dr) )"];
+is<-do [label="4. register( wid(do), email(do), pubkey(do) )"];
+
+...;
+
+dr->is [label="5. wid_request( email(cu) )"];
+dr<-is [label="6. wid_response( email(cu), wid(cu), pubkey(cu) )"];
+
+dr->cu [label="7. eth_request( email(dr), eth(dr), sign(key(dr)) )"];
+cu->is [label="8. wid_request( email(dr) )"];
+cu<-is [label="9. wid_response( email(dr), wid(dr), pubkey(dr) )"];
+dr<-cu [label="10. eth_response( eth(cu), sign(key(cu)) )"];
+
+dr->is [label="11. wid_request( email(do) )"];
+dr<-is [label="12. wid_response( email(do), wid(do), pubkey(do) )"];
+
+dr->do [label="13. eth_request( email(dr), eth(dr), sign( key(dr) ) )"];
+do->is [label="14. wid_request( email(dr) )"];
+do<-is [label="15. wid_response( email(dr), wid(dr), pubkey(dr) )"];
+dr<-do [label="16. eth_response( eth(do), sign( key(do) ) )"];
+
+dr=>sc [label="17. create_contract( eth(cu), eth(do), eth(dr) )"];
+
+sc<=dr [label="18. consent_request( eth(cu), crypt( pubkey(cu), data_spec( email(cu), email(do), email(dr) ) ) )"];
+sc=>cu [label="19. consent_request( encrypted(cu) )"];
+
+cu->is [label="20. wid_request( email(do) )"];
+cu<-is [label="21. wid_response( email(do), wid(do), pubkey(do) )"];
+
+sc<=cu [label="22. consent_response( eth(cu), crypt( pubkey(do), data_spec( email(cu), email(do), email(dr) ) ) )"];
+sc=>dr [label="23. consent_response( encrypted(do) )"];
+
+sc<=dr [label="24. data_request( eth(do), encrypted(do) )"];
+sc=>do [label="25. data_request( encrypted(do) )"];
+
+do=>sc [label="26. data_available( eth(dr), crypt( pubkey(dr), data_spec( email(cu), email(do), email(dr) ) ) )"];
+dr<=sc [label="27. data_available( encrypted(dr) )"];
+
+}
+
