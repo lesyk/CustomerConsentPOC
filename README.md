@@ -3,6 +3,7 @@
 ## Sequence diagram
 
 ![Sequence diagram](https://rawgit.com/e-nettet/CustomerConsentPOC/master/sequence-new.svg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flesyk%2FCustomerConsentPOC.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Flesyk%2FCustomerConsentPOC?ref=badge_shield)
 
   1. Identity Service broadcasts its own Whisper address.
   2. Customer registers its Whisper address, email, and public key.
@@ -32,3 +33,7 @@
   26. Data Owner publishes the data encrypted with the Data Requesters public key.
   27. Smart Contract forwards the data to the Data Requester.
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flesyk%2FCustomerConsentPOC.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flesyk%2FCustomerConsentPOC?ref=badge_large)
